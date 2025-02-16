@@ -83,7 +83,8 @@ export default function useWordle(solution) {
    * Handle keyup event and track current guess
    * if user presses enter, add new guess
    */
-  function handleKeyPress({ key }) {
+  function handleKeyPress(eventOrKey) {
+    let key = typeof eventOrKey === "string" ? eventOrKey : eventOrKey.key;
     if (key === "Enter") {
       // only add guess is guesses made < 5
       if (turn > 5) {

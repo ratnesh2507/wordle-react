@@ -31,7 +31,7 @@ function Keypad({ usedKeys, onKeyPress }) {
           <button
             key={l.key}
             className={usedKeys[l.key] || ""}
-            onClick={() => onKeyPress(l.key)}
+            onClick={() => onKeyPress({ key: l.key })}
           >
             {l.key}
           </button>
@@ -42,7 +42,7 @@ function Keypad({ usedKeys, onKeyPress }) {
           <button
             key={l.key}
             className={usedKeys[l.key] || ""}
-            onClick={() => onKeyPress(l.key)}
+            onClick={() => onKeyPress({ key: l.key })}
           >
             {l.key}
           </button>
@@ -55,7 +55,7 @@ function Keypad({ usedKeys, onKeyPress }) {
             className={`${
               l.key === "Enter" || l.key === "Backspace" ? "special-key" : ""
             } ${usedKeys[l.key] || ""}`}
-            onClick={() => onKeyPress(l.key)}
+            onClick={() => onKeyPress({ key: l.key })}
           >
             {l.key === "Backspace" ? "⌫" : l.key === "Enter" ? "⏎" : l.key}
           </button>

@@ -23,7 +23,9 @@ function Wordle({ solution }) {
         window.removeEventListener("keyup", handleKeyPress);
       }
 
-      return () => window.removeEventListener("keyup", handleKeyPress);
+      return () => {
+        window.removeEventListener("keyup", handleKeyPress);
+      };
     },
     [handleKeyPress, turn, isCorrect]
   );
