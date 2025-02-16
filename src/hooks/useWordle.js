@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function useWordle(solution) {
   const [turn, setTurn] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
-  const [guesses, setGuesses] = useState([]); //array
+  const [guesses, setGuesses] = useState([...Array(6)]); //array
   const [history, setHistory] = useState([]); //string
   const [isCorrect, setIsCorrect] = useState(false);
 
@@ -38,7 +38,21 @@ export default function useWordle(solution) {
    * update the isCorrect state if the guess is correct
    * add one turn to the state
    **/
-  function addNewGuess() {}
+  function addNewGuess(formattedGuess) {
+    if (currentGuess === solution) {
+      setIsCorrect(true);
+    }
+    setGuesses((prevGuesses) => {
+      let newGuesses = [...prevGuesses];
+      newGuesses[turn] = formattedGuess;
+      return newGuesses;
+    });
+    setHistory((prevHistory) => {
+      return [...prevHistory, currentGuess];
+    });
+    setTurn((prevTurn) => prevTurn + 1);
+    setCurrentGuess("");
+  }
 
   /**
    * Handle keyup event and track current guess
@@ -62,7 +76,7 @@ export default function useWordle(solution) {
         return;
       }
       const colorMap = formatGuess();
-      console.log(colorMap);
+      addNewGuess(colorMap);
     }
     if (key === "Backspace") {
       setCurrentGuess((prev) => prev.slice(0, -1));
