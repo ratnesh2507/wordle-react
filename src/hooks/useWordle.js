@@ -22,7 +22,34 @@ export default function useWordle(solution) {
    * Handle keyup event and track current guess
    * if user presses enter, add new guess
    */
-  function handleKeyPress() {}
+  function handleKeyPress({ key }) {
+    if (key === "Enter") {
+      // only add guess is guesses made < 5
+      if (turn > 5) {
+        console.log("All guesses have been used");
+        return;
+      }
+      // don't allow duplicate words
+      if (history.contains(currentGuess)) {
+        console.log("You already tried this word");
+        return;
+      }
+      // check is word.length = 5
+      if (currentGuess.length !== 5) {
+        console.log("Word must be 5 characters long");
+        return;
+      }
+      formatGuess();
+    }
+    if (key === "Backspace") {
+      setCurrentGuess((prev) => prev.slice(0, -1));
+    }
+    if (/^[A-Za-z]$/.test(key)) {
+      if (currentGuess.length < 5) {
+        setCurrentGuess((prev) => prev + key);
+      }
+    }
+  }
 
   return { turn, currentGuess, guesses, isCorrect, handleKeyPress };
 }
