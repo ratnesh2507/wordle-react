@@ -9,7 +9,29 @@ export default function useWordle(solution) {
 
   // Change the guessed word into an array of letter objects
   // ex: [{ key: 'a'}, color: 'yellow' }]
-  function formatGuess() {}
+  function formatGuess() {
+    let solutionArray = [...solution];
+    let formattedGuess = [...currentGuess].map((letter) => {
+      return { key: letter, color: "grey" };
+    });
+
+    //finding green letters
+    formattedGuess.forEach((letter, idx) => {
+      if (solutionArray[idx] === letter.key) {
+        formattedGuess[idx].color = "green";
+        solutionArray[idx] = null;
+      }
+    });
+
+    //finding yellow letters
+    formattedGuess.forEach((letter, idx) => {
+      if (solutionArray.includes(letter.key) && letter.color !== "green") {
+        formatGuess[idx].color = "yellow";
+        solutionArray[solutionArray.indexOf(letter.key)] = null;
+      }
+    });
+    return formattedGuess;
+  }
 
   /**
    * Add every new guess to the guesses state
@@ -30,7 +52,7 @@ export default function useWordle(solution) {
         return;
       }
       // don't allow duplicate words
-      if (history.contains(currentGuess)) {
+      if (history.includes(currentGuess)) {
         console.log("You already tried this word");
         return;
       }
@@ -39,7 +61,8 @@ export default function useWordle(solution) {
         console.log("Word must be 5 characters long");
         return;
       }
-      formatGuess();
+      const colorMap = formatGuess();
+      console.log(colorMap);
     }
     if (key === "Backspace") {
       setCurrentGuess((prev) => prev.slice(0, -1));
