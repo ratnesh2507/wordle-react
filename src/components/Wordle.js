@@ -21,7 +21,7 @@ function Wordle({ solution }) {
 
       return () => window.removeEventListener("keyup", handleKeyPress);
     },
-    [handleKeyPress]
+    [handleKeyPress, turn, isCorrect]
   );
 
   return (
