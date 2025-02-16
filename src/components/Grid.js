@@ -7,7 +7,7 @@ function Grid({ currentGuess, guesses, turn }) {
         if (turn === idx) {
           return <Row key={idx} currentGuess={currentGuess} />;
         }
-        <Row key={idx} guess={guess} />;
+        return <Row key={idx} guess={guess} />;
       })}
     </div>
   );

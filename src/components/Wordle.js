@@ -24,6 +24,7 @@ function Wordle({ solution }) {
 
   return (
     <div>
+      <div>Solution - {solution}</div>
       <div>Current guess - {currentGuess}</div>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
     </div>

@@ -26,7 +26,7 @@ export default function useWordle(solution) {
     //finding yellow letters
     formattedGuess.forEach((letter, idx) => {
       if (solutionArray.includes(letter.key) && letter.color !== "green") {
-        formatGuess[idx].color = "yellow";
+        formattedGuess[idx].color = "yellow";
         solutionArray[solutionArray.indexOf(letter.key)] = null;
       }
     });
