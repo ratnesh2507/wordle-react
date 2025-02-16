@@ -4,7 +4,7 @@ function Grid({ currentGuess, guesses, turn }) {
   return (
     <div>
       {guesses.map((guess, idx) => (
-        <Row key={idx} />
+        <Row key={idx} guess={guess} />
       ))}
     </div>
   );
